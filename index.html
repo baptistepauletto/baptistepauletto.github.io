@@ -197,19 +197,29 @@
             0%, 50% { opacity: 1; }
             51%, 100% { opacity: 0; }
         }
+
+        /* Scramble text effect */
+        .scramble-text {
+            cursor: pointer;
+            transition: color 0.1s ease;
+        }
+
+        .scramble-text:hover {
+            color: #00ff00;
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
         <div class="header">
-            <div class="name">Baptiste Pauletto<span class="cursor">_</span></div>
-            <div class="title">Data Scientist & Software Engineer</div>
+            <div class="name scramble-text">Baptiste Pauletto<span class="cursor">_</span></div>
+            <div class="title scramble-text">Data Scientist & Software Engineer</div>
             <div class="prompt">bpauletto@dev:~$</div>
         </div>
 
         <div class="section">
-            <div class="section-title">whoami</div>
+            <div class="section-title scramble-text">whoami</div>
             <div class="content">
                 <div class="output">
                     Passionate developer with expertise in data science and software engineering. <br>
@@ -220,7 +230,7 @@
         </div>
 
         <div class="section">
-            <div class="section-title">ls -la skills/</div>
+            <div class="section-title scramble-text">ls -la skills/</div>
             <div class="skills">
                 <div class="skill-category">
                     <h4>Data Science & ML</h4>
@@ -257,17 +267,17 @@
         </div>
 
         <div class="section">
-            <div class="section-title">contact --info</div>
+            <div class="section-title scramble-text">contact --info</div>
             <div class="contact-info">
                 <p><span class="command">email:</span> <a href="mailto:lemaildebaptistepauletto@gmail.com" class="link">lemaildebaptistepauletto@gmail.com</a></p>
                 <p><span class="command">github:</span> <a href="https://github.com/baptistepauletto" class="link" target="_blank">github.com/baptistepauletto</a></p>
-                <p><span class="command">linkedin:</span> <a href="https://linkedin.com/in/baptistepauletto" class="link" target="_blank">linkedin.com/in/baptistepauletto</a></p>
+                <p><span class="command">linkedin:</span> <a href="https://www.linkedin.com/in/baptiste-pauletto/" class="link" target="_blank">linkedin.com/in/baptiste-pauletto</a></p>
                 <p><span class="command">location:</span> <span class="output">Montréal, Canada</span></p>
             </div>
         </div>
 
         <div class="section">
-            <div class="section-title">cat degrees.txt</div>
+            <div class="section-title scramble-text">cat degrees.txt</div>
             <div class="content">
                 <div class="output">
                     <p>🚀 <a href="https://www.polymtl.ca/" class="link">Polytechnique Montréal</a> - master degree in machine learning and data science</p>
@@ -293,6 +303,53 @@
                     cursor.style.opacity = cursor.style.opacity === '0' ? '1' : '0';
                 }, 500);
             }
+
+            // Scramble text effect
+            const scrambleElements = document.querySelectorAll('.scramble-text');
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?';
+            
+            scrambleElements.forEach(element => {
+                let originalText = element.innerHTML;
+                let isScrambling = false;
+                
+                element.addEventListener('mouseenter', function() {
+                    if (isScrambling) return;
+                    isScrambling = true;
+                    
+                    let iterations = 0;
+                    const maxIterations = 10;
+                    
+                    const scrambleInterval = setInterval(() => {
+                        let scrambledText = '';
+                        const textContent = originalText.replace(/<[^>]*>/g, ''); // Remove HTML tags for scrambling
+                        
+                        for (let i = 0; i < textContent.length; i++) {
+                            if (textContent[i] === ' ') {
+                                scrambledText += ' ';
+                            } else if (iterations < maxIterations && Math.random() < 0.7) {
+                                scrambledText += characters[Math.floor(Math.random() * characters.length)];
+                            } else {
+                                scrambledText += textContent[i];
+                            }
+                        }
+                        
+                        // Preserve HTML structure (like cursor span)
+                        if (originalText.includes('<span')) {
+                            element.innerHTML = originalText.replace(textContent, scrambledText);
+                        } else {
+                            element.innerHTML = scrambledText;
+                        }
+                        
+                        iterations++;
+                        
+                        if (iterations >= maxIterations + 5) {
+                            element.innerHTML = originalText;
+                            clearInterval(scrambleInterval);
+                            isScrambling = false;
+                        }
+                    }, 50);
+                });
+            });
         });
     </script>
 </body>
