@@ -19,27 +19,281 @@
     <!-- modernizr -->
     <script src="js/modernizr.js"></script>
 
+    <!-- Google Fonts for monospace -->
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 2rem;
+            font-size: 14px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+
+        .header {
+            margin-bottom: 3rem;
+            border-bottom: 1px solid #333;
+            padding-bottom: 2rem;
+        }
+
+        .name {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #00ff00;
+        }
+
+        .title {
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: #888;
+            margin-bottom: 1rem;
+        }
+
+        .prompt {
+            color: #00ff00;
+            font-weight: 500;
+        }
+
+        .section {
+            margin-bottom: 2.5rem;
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            color: #00ff00;
+        }
+
+        .section-title::before {
+            content: "$ ";
+            color: #00ff00;
+        }
+
+        .content {
+            margin-left: 1rem;
+            line-height: 1.8;
+        }
+
+        .command {
+            color: #00ff00;
+            font-weight: 500;
+        }
+
+        .output {
+            color: #ffffff;
+            margin-left: 1rem;
+        }
+
+        .link {
+            color: #0099ff;
+            text-decoration: none;
+            border-bottom: 1px dotted #0099ff;
+            transition: all 0.3s ease;
+        }
+
+        .link:hover {
+            color: #00ff00;
+            border-bottom-color: #00ff00;
+        }
+
+        .skills {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-left: 1rem;
+        }
+
+        .skill-category {
+            background: #111;
+            padding: 1rem;
+            border: 1px solid #333;
+            border-radius: 4px;
+        }
+
+        .skill-category h4 {
+            color: #00ff00;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .skill-list {
+            list-style: none;
+            font-size: 0.9rem;
+        }
+
+        .skill-list li {
+            margin-bottom: 0.3rem;
+            color: #ccc;
+        }
+
+        .skill-list li::before {
+            content: "• ";
+            color: #00ff00;
+        }
+
+        .contact-info {
+            margin-left: 1rem;
+        }
+
+        .contact-info p {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #333;
+            text-align: center;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+                font-size: 13px;
+            }
+            
+            .name {
+                font-size: 2rem;
+            }
+            
+            .skills {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Cursor animation */
+        .cursor {
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+    </style>
 </head>
 
-<style>
-    body {
-        margin: 0;
-        height: 100%;
-        overflow-y: hidden;
-    }
-</style>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="name">Baptiste Pauletto<span class="cursor">_</span></div>
+            <div class="title">Data Scientist & Software Engineer</div>
+            <div class="prompt">bpauletto@mtl:~$</div>
+        </div>
 
-<body >
+        <div class="section">
+            <div class="section-title">whoami</div>
+            <div class="content">
+                <div class="output">
+                    Passionate developer with expertise in data science and software engineering. <br>
+                    I love spending time creating efficient, scalable solutions and exploring new technologies. <br>
+                    Always eager to learn and tackle challenging problems.
+                </div>
+            </div>
+        </div>
 
-    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.79/build/spline-viewer.js"></script>
-    <spline-viewer url="https://prod.spline.design/rsNb4OYJMwfwvtq6/scene.splinecode"></spline-viewer>
+        <div class="section">
+            <div class="section-title">ls -la skills/</div>
+            <div class="skills">
+                <div class="skill-category">
+                    <h4>Frontend</h4>
+                    <ul class="skill-list">
+                        <li>JavaScript/TypeScript</li>
+                        <li>React/Next.js</li>
+                        <li>Vue.js</li>
+                        <li>HTML5/CSS3</li>
+                        <li>Tailwind CSS</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h4>Backend</h4>
+                    <ul class="skill-list">
+                        <li>Node.js</li>
+                        <li>Python</li>
+                        <li>Express.js</li>
+                        <li>FastAPI</li>
+                        <li>PostgreSQL/MongoDB</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h4>Tools & Others</h4>
+                    <ul class="skill-list">
+                        <li>Git/GitHub</li>
+                        <li>Docker</li>
+                        <li>AWS/Cloud</li>
+                        <li>Linux/Unix</li>
+                        <li>CI/CD</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
 
+        <div class="section">
+            <div class="section-title">contact --info</div>
+            <div class="contact-info">
+                <p><span class="command">email:</span> <a href="mailto:lemaildebaptistepauletto@gmail.com" class="link">lemaildebaptistepauletto@gmail.com</a></p>
+                <p><span class="command">github:</span> <a href="https://github.com/baptistepauletto" class="link" target="_blank">github.com/baptistepauletto</a></p>
+                <p><span class="command">linkedin:</span> <a href="https://linkedin.com/in/baptistepauletto" class="link" target="_blank">linkedin.com/in/baptistepauletto</a></p>
+                <p><span class="command">location:</span> <span class="output">Montréal, Canada</span></p>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">cat degrees.txt</div>
+            <div class="content">
+                <div class="output">
+                    <p>🚀 <a href="https://www.polymtl.ca/" class="link">Polytechnique Montréal</a> - master degree in machine learning and data science</p>
+                    <p>💼 <a href="https://www.concordia.ca/" class="link">INSA Lyon</a> - master degree in computer science</p>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="footer">
+            <p>&copy; 2025 Baptiste Pauletto. Built with ❤️ and a few ☕</p>
+        </div>
+    </div>
+
+    <script>
+        // Add some interactive terminal-like behavior
+        document.addEventListener('DOMContentLoaded', function() {
+            // Simple typing effect for the cursor
+            const cursor = document.querySelector('.cursor');
+            if (cursor) {
+                setInterval(() => {
+                    cursor.style.opacity = cursor.style.opacity === '0' ? '1' : '0';
+                }, 500);
+            }
+        });
+    </script>
 </body>
 
 </html>
