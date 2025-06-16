@@ -30,6 +30,32 @@
     <![endif]-->
 
     <style>
+        :root {
+            /* Dark theme (default) */
+            --bg-primary: #000000;
+            --bg-secondary: #111111;
+            --text-primary: #ffffff;
+            --text-secondary: #cccccc;
+            --text-muted: #888888;
+            --accent-primary: #00ff00;
+            --accent-secondary: #0099ff;
+            --border-color: #333333;
+            --shadow-color: rgba(0, 255, 0, 0.1);
+        }
+
+        [data-theme="light"] {
+            /* Light theme */
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --text-primary: #1a1a1a;
+            --text-secondary: #333333;
+            --text-muted: #666666;
+            --accent-primary: #007700;
+            --accent-secondary: #0066cc;
+            --border-color: #e0e0e0;
+            --shadow-color: rgba(0, 119, 0, 0.1);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -37,13 +63,14 @@
         }
 
         body {
-            background-color: #000000;
-            color: #ffffff;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
             font-family: 'JetBrains Mono', 'Courier New', monospace;
             line-height: 1.6;
             min-height: 100vh;
             padding: 2rem;
             font-size: 14px;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         .container {
@@ -54,26 +81,58 @@
 
         .header {
             margin-bottom: 3rem;
-            border-bottom: 1px solid #333;
+            border-bottom: 1px solid var(--border-color);
             padding-bottom: 2rem;
+            position: relative;
+        }
+
+        .theme-toggle-container {
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+
+        .theme-toggle {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            background: var(--accent-primary);
+            color: var(--bg-primary);
+            transform: scale(1.05);
+        }
+
+        .theme-icon {
+            font-size: 1rem;
         }
 
         .name {
             font-size: 2.5rem;
             font-weight: 700;
             margin-bottom: 0.5rem;
-            color: #00ff00;
+            color: var(--accent-primary);
         }
 
         .title {
             font-size: 1.2rem;
             font-weight: 300;
-            color: #888;
+            color: var(--text-muted);
             margin-bottom: 1rem;
         }
 
         .prompt {
-            color: #00ff00;
+            color: var(--accent-primary);
             font-weight: 500;
         }
 
@@ -85,12 +144,12 @@
             font-size: 1.4rem;
             font-weight: 500;
             margin-bottom: 1rem;
-            color: #00ff00;
+            color: var(--accent-primary);
         }
 
         .section-title::before {
             content: "$ ";
-            color: #00ff00;
+            color: var(--accent-primary);
         }
 
         .content {
@@ -99,25 +158,25 @@
         }
 
         .command {
-            color: #00ff00;
+            color: var(--accent-primary);
             font-weight: 500;
         }
 
         .output {
-            color: #ffffff;
+            color: var(--text-primary);
             margin-left: 1rem;
         }
 
         .link {
-            color: #0099ff;
+            color: var(--accent-secondary);
             text-decoration: none;
-            border-bottom: 1px dotted #0099ff;
+            border-bottom: 1px dotted var(--accent-secondary);
             transition: all 0.3s ease;
         }
 
         .link:hover {
-            color: #00ff00;
-            border-bottom-color: #00ff00;
+            color: var(--accent-primary);
+            border-bottom-color: var(--accent-primary);
         }
 
         .skills {
@@ -128,14 +187,15 @@
         }
 
         .skill-category {
-            background: #111;
+            background: var(--bg-secondary);
             padding: 1rem;
-            border: 1px solid #333;
+            border: 1px solid var(--border-color);
             border-radius: 4px;
+            transition: all 0.3s ease;
         }
 
         .skill-category h4 {
-            color: #00ff00;
+            color: var(--accent-primary);
             margin-bottom: 0.5rem;
             font-size: 1rem;
         }
@@ -147,12 +207,12 @@
 
         .skill-list li {
             margin-bottom: 0.3rem;
-            color: #ccc;
+            color: var(--text-secondary);
         }
 
         .skill-list li::before {
             content: "• ";
-            color: #00ff00;
+            color: var(--accent-primary);
         }
 
         .contact-info {
@@ -166,9 +226,9 @@
         .footer {
             margin-top: 3rem;
             padding-top: 2rem;
-            border-top: 1px solid #333;
+            border-top: 1px solid var(--border-color);
             text-align: center;
-            color: #666;
+            color: var(--text-muted);
             font-size: 0.9rem;
         }
 
@@ -207,12 +267,73 @@
         .scramble-text:hover {
             color: #00ff00;
         }
+
+        /* Experience Timeline Styles */
+        .experience-timeline {
+            margin-left: 1rem;
+        }
+
+        .experience-item {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-primary);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .experience-item:hover {
+            border-left-color: var(--accent-secondary);
+            box-shadow: 0 4px 12px var(--shadow-color);
+            transform: translateX(5px);
+        }
+
+        .experience-header {
+            margin-bottom: 1rem;
+        }
+
+        .experience-title {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--accent-primary);
+            margin-bottom: 0.3rem;
+        }
+
+        .experience-company {
+            font-size: 1rem;
+            color: var(--accent-secondary);
+            margin-bottom: 0.3rem;
+        }
+
+        .experience-period {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .experience-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .experience-description p {
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
         <div class="header">
+            <div class="theme-toggle-container">
+                <button class="theme-toggle" id="themeToggle" title="Toggle theme">
+                    <span class="theme-icon">🌙</span>
+                    <span class="theme-text">light</span>
+                </button>
+            </div>
             <div class="name scramble-text">Baptiste Pauletto<span class="cursor">_</span></div>
             <div class="title scramble-text">Data Scientist & Software Engineer</div>
             <div class="prompt">bpauletto@dev:~$</div>
@@ -267,6 +388,52 @@
         </div>
 
         <div class="section">
+            <div class="section-title scramble-text">tail experience.log</div>
+            <div class="content">
+                <div class="experience-timeline">
+                    <div class="experience-item">
+                        <div class="experience-header">
+                            <div class="experience-title">Data Scientist & ML Engineer</div>
+                            <div class="experience-company">Tech Company</div>
+                            <div class="experience-period">2023 - Present</div>
+                        </div>
+                        <div class="experience-description">
+                            <p>• Developed and deployed machine learning models for predictive analytics</p>
+                            <p>• Built data pipelines processing 10M+ records daily using Python and SQL</p>
+                            <p>• Collaborated with cross-functional teams to deliver data-driven solutions</p>
+                        </div>
+                    </div>
+                    
+                    <div class="experience-item">
+                        <div class="experience-header">
+                            <div class="experience-title">Software Engineering Intern</div>
+                            <div class="experience-company">Previous Company</div>
+                            <div class="experience-period">2022 - 2023</div>
+                        </div>
+                        <div class="experience-description">
+                            <p>• Implemented full-stack web applications using modern frameworks</p>
+                            <p>• Optimized database queries resulting in 40% performance improvement</p>
+                            <p>• Participated in code reviews and agile development processes</p>
+                        </div>
+                    </div>
+                    
+                    <div class="experience-item">
+                        <div class="experience-header">
+                            <div class="experience-title">Research Assistant</div>
+                            <div class="experience-company">University Lab</div>
+                            <div class="experience-period">2021 - 2022</div>
+                        </div>
+                        <div class="experience-description">
+                            <p>• Conducted research in natural language processing and machine learning</p>
+                            <p>• Published findings in academic conferences and journals</p>
+                            <p>• Mentored junior students in research methodologies</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
             <div class="section-title scramble-text">touch projects.txt</div>
             <div class="content">
                 <div class="output">
@@ -306,6 +473,35 @@
     <script>
         // Add some interactive terminal-like behavior
         document.addEventListener('DOMContentLoaded', function() {
+            // Theme toggle functionality
+            const themeToggle = document.getElementById('themeToggle');
+            const themeIcon = themeToggle.querySelector('.theme-icon');
+            const themeText = themeToggle.querySelector('.theme-text');
+            const body = document.body;
+
+            // Load saved theme or default to dark
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            setTheme(savedTheme);
+
+            themeToggle.addEventListener('click', function() {
+                const currentTheme = body.getAttribute('data-theme') || 'dark';
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                setTheme(newTheme);
+                localStorage.setItem('theme', newTheme);
+            });
+
+            function setTheme(theme) {
+                if (theme === 'light') {
+                    body.setAttribute('data-theme', 'light');
+                    themeIcon.textContent = '☀️';
+                    themeText.textContent = 'dark';
+                } else {
+                    body.removeAttribute('data-theme');
+                    themeIcon.textContent = '🌙';
+                    themeText.textContent = 'light';
+                }
+            }
+
             // Simple typing effect for the cursor
             const cursor = document.querySelector('.cursor');
             if (cursor) {
