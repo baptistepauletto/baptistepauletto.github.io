@@ -423,35 +423,49 @@
             font-size: 0.95rem;
         }
 
-        /* Collapsible Experience Section */
-        .collapsible-header {
+        /* Experience Expand Button */
+        .experience-expand-btn {
+            margin: 1.5rem 0;
+            padding: 0.8rem 1.5rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
             cursor: pointer;
             user-select: none;
-            transition: color 0.3s ease;
-        }
-
-        .collapsible-header:hover {
-            color: var(--accent-secondary) !important;
-        }
-
-        .collapse-indicator {
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
             font-size: 0.9rem;
-            margin-left: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        .experience-expand-btn:hover {
+            background: var(--accent-primary);
+            color: var(--bg-primary);
+            border-color: var(--accent-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px var(--shadow-color);
+        }
+
+        .expand-indicator {
+            font-size: 0.8rem;
             transition: transform 0.3s ease;
         }
 
-        .collapsible-header.expanded .collapse-indicator {
+        .experience-expand-btn.expanded .expand-indicator {
             transform: rotate(45deg);
         }
 
-        .collapsible-content {
+        .experience-older {
             overflow: hidden;
             transition: max-height 0.4s ease-out, opacity 0.3s ease;
             max-height: 0;
             opacity: 0;
         }
 
-        .collapsible-content.expanded {
+        .experience-older.expanded {
             max-height: 2000px;
             opacity: 1;
         }
@@ -783,32 +797,36 @@
                 });
             });
 
-            // Collapsible experience section
-            const collapsibleHeaders = document.querySelectorAll('.collapsible-header');
+            // Experience expand functionality
+            const expandBtn = document.getElementById('experienceExpandBtn');
+            const olderExperience = document.getElementById('experienceOlder');
             
-            collapsibleHeaders.forEach(header => {
-                header.addEventListener('click', function() {
-                    const targetId = this.getAttribute('data-target');
-                    const content = document.getElementById(targetId);
-                    const indicator = this.querySelector('.collapse-indicator');
+            if (expandBtn && olderExperience) {
+                expandBtn.addEventListener('click', function() {
+                    const expandText = this.querySelector('.expand-text');
+                    const expandIndicator = this.querySelector('.expand-indicator');
                     
-                    if (content.classList.contains('expanded')) {
+                    if (olderExperience.classList.contains('expanded')) {
                         // Collapse
-                        content.classList.remove('expanded');
+                        olderExperience.classList.remove('expanded');
                         this.classList.remove('expanded');
-                        indicator.textContent = '[+]';
-                        content.style.display = 'none';
+                        expandText.textContent = 'Show more experience';
+                        expandIndicator.textContent = '[+]';
+                        setTimeout(() => {
+                            olderExperience.style.display = 'none';
+                        }, 400);
                     } else {
                         // Expand
-                        content.style.display = 'block';
+                        olderExperience.style.display = 'block';
                         setTimeout(() => {
-                            content.classList.add('expanded');
+                            olderExperience.classList.add('expanded');
                             this.classList.add('expanded');
-                            indicator.textContent = '[-]';
+                            expandText.textContent = 'Show less experience';
+                            expandIndicator.textContent = '[-]';
                         }, 10);
                     }
                 });
-            });
+            }
 
             // Terminal simulator functionality
             const terminalInput = document.querySelector('.terminal-input');
