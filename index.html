@@ -422,6 +422,128 @@
             margin-bottom: 0.5rem;
             font-size: 0.95rem;
         }
+
+        /* Collapsible Experience Section */
+        .collapsible-header {
+            cursor: pointer;
+            user-select: none;
+            transition: color 0.3s ease;
+        }
+
+        .collapsible-header:hover {
+            color: var(--accent-secondary) !important;
+        }
+
+        .collapse-indicator {
+            font-size: 0.9rem;
+            margin-left: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .collapsible-header.expanded .collapse-indicator {
+            transform: rotate(45deg);
+        }
+
+        .collapsible-content {
+            overflow: hidden;
+            transition: max-height 0.4s ease-out, opacity 0.3s ease;
+            max-height: 0;
+            opacity: 0;
+        }
+
+        .collapsible-content.expanded {
+            max-height: 2000px;
+            opacity: 1;
+        }
+
+        /* Terminal Simulator Styles */
+        .terminal-simulator {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-left: 1rem;
+            overflow: hidden;
+            box-shadow: 0 4px 12px var(--shadow-color);
+        }
+
+        .terminal-header {
+            background: var(--border-color);
+            padding: 0.5rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .terminal-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .terminal-button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: block;
+        }
+
+        .terminal-button.close { background: #ff5f56; }
+        .terminal-button.minimize { background: #ffbd2e; }
+        .terminal-button.maximize { background: #27ca3f; }
+
+        .terminal-title {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .terminal-body {
+            padding: 1rem;
+        }
+
+        .terminal-line {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .terminal-prompt {
+            color: var(--accent-primary);
+            margin-right: 0.5rem;
+            font-weight: 500;
+        }
+
+        .terminal-input {
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: inherit;
+            outline: none;
+            flex: 1;
+            caret-color: var(--accent-primary);
+        }
+
+        .terminal-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .terminal-output {
+            margin-top: 1rem;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .terminal-output-line {
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        .terminal-output-line.command {
+            color: var(--accent-primary);
+        }
+
+        .terminal-output-line.error {
+            color: #ff6b6b;
+        }
     </style>
 </head>
 
@@ -446,6 +568,62 @@
                     Passionate developer with expertise in data science and software engineering. <br>
                     I love spending time creating efficient, scalable solutions and exploring new technologies. <br>
                     Always eager to learn and tackle challenging problems.
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title scramble-text">tail experience.log</div>
+            <div class="content">
+                <div class="experience-timeline">
+                    <!-- Latest entry - always visible -->
+                    <div class="experience-item">
+                        <div class="experience-header">
+                            <div class="experience-title">Data Scientist & ML Engineer</div>
+                            <div class="experience-company">Tech Company</div>
+                            <div class="experience-period">2023 - Present</div>
+                        </div>
+                        <div class="experience-description">
+                            <p>• Developed and deployed machine learning models for predictive analytics</p>
+                            <p>• Built data pipelines processing 10M+ records daily using Python and SQL</p>
+                            <p>• Collaborated with cross-functional teams to deliver data-driven solutions</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Expand button -->
+                    <div class="experience-expand-btn" id="experienceExpandBtn">
+                        <span class="expand-text">Show more experience</span>
+                        <span class="expand-indicator">[+]</span>
+                    </div>
+                    
+                    <!-- Hidden older entries -->
+                    <div class="experience-older" id="experienceOlder" style="display: none;">
+                        <div class="experience-item">
+                            <div class="experience-header">
+                                <div class="experience-title">Software Engineering Intern</div>
+                                <div class="experience-company">Previous Company</div>
+                                <div class="experience-period">2022 - 2023</div>
+                            </div>
+                            <div class="experience-description">
+                                <p>• Implemented full-stack web applications using modern frameworks</p>
+                                <p>• Optimized database queries resulting in 40% performance improvement</p>
+                                <p>• Participated in code reviews and agile development processes</p>
+                            </div>
+                        </div>
+                        
+                        <div class="experience-item">
+                            <div class="experience-header">
+                                <div class="experience-title">Research Assistant</div>
+                                <div class="experience-company">University Lab</div>
+                                <div class="experience-period">2021 - 2022</div>
+                            </div>
+                            <div class="experience-description">
+                                <p>• Conducted research in natural language processing and machine learning</p>
+                                <p>• Published findings in academic conferences and journals</p>
+                                <p>• Mentored junior students in research methodologies</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -483,53 +661,6 @@
                         <li>French/English/German/Russian</li>
                     </ul>
                 </div>
-                
-            </div>
-        </div>
-
-        <div class="section">
-            <div class="section-title scramble-text">tail experience.log</div>
-            <div class="content">
-                <div class="experience-timeline">
-                    <div class="experience-item">
-                        <div class="experience-header">
-                            <div class="experience-title">Data Scientist & ML Engineer</div>
-                            <div class="experience-company">Tech Company</div>
-                            <div class="experience-period">2023 - Present</div>
-                        </div>
-                        <div class="experience-description">
-                            <p>• Developed and deployed machine learning models for predictive analytics</p>
-                            <p>• Built data pipelines processing 10M+ records daily using Python and SQL</p>
-                            <p>• Collaborated with cross-functional teams to deliver data-driven solutions</p>
-                        </div>
-                    </div>
-                    
-                    <div class="experience-item">
-                        <div class="experience-header">
-                            <div class="experience-title">Software Engineering Intern</div>
-                            <div class="experience-company">Previous Company</div>
-                            <div class="experience-period">2022 - 2023</div>
-                        </div>
-                        <div class="experience-description">
-                            <p>• Implemented full-stack web applications using modern frameworks</p>
-                            <p>• Optimized database queries resulting in 40% performance improvement</p>
-                            <p>• Participated in code reviews and agile development processes</p>
-                        </div>
-                    </div>
-                    
-                    <div class="experience-item">
-                        <div class="experience-header">
-                            <div class="experience-title">Research Assistant</div>
-                            <div class="experience-company">University Lab</div>
-                            <div class="experience-period">2021 - 2022</div>
-                        </div>
-                        <div class="experience-description">
-                            <p>• Conducted research in natural language processing and machine learning</p>
-                            <p>• Published findings in academic conferences and journals</p>
-                            <p>• Mentored junior students in research methodologies</p>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
 
@@ -559,6 +690,29 @@
                 <div class="output">
                     <p>🚀 <a href="https://www.polymtl.ca/programmes/programmes/maitrise-professionnelle-en-genie-informatique" class="link">Polytechnique Montréal</a> - master degree in machine learning and data science</p>
                     <p>💼 <a href="https://www.groupe-insa.fr/preparer/nos-formations/ingenieur/informatique" class="link">INSA Lyon</a> - master degree in computer science</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title scramble-text">interactive-terminal</div>
+            <div class="content">
+                <div class="terminal-simulator">
+                    <div class="terminal-header">
+                        <div class="terminal-buttons">
+                            <span class="terminal-button close"></span>
+                            <span class="terminal-button minimize"></span>
+                            <span class="terminal-button maximize"></span>
+                        </div>
+                        <div class="terminal-title">bpauletto@dev:~</div>
+                    </div>
+                    <div class="terminal-body">
+                        <div class="terminal-line">
+                            <span class="terminal-prompt">bpauletto@dev:~$ </span>
+                            <input type="text" class="terminal-input" placeholder="Try: help, skills, projects, contact, clear" autocomplete="off">
+                        </div>
+                        <div class="terminal-output" id="terminalOutput"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -628,6 +782,79 @@
                     card.style.setProperty('--mouse-y', '50%');
                 });
             });
+
+            // Collapsible experience section
+            const collapsibleHeaders = document.querySelectorAll('.collapsible-header');
+            
+            collapsibleHeaders.forEach(header => {
+                header.addEventListener('click', function() {
+                    const targetId = this.getAttribute('data-target');
+                    const content = document.getElementById(targetId);
+                    const indicator = this.querySelector('.collapse-indicator');
+                    
+                    if (content.classList.contains('expanded')) {
+                        // Collapse
+                        content.classList.remove('expanded');
+                        this.classList.remove('expanded');
+                        indicator.textContent = '[+]';
+                        content.style.display = 'none';
+                    } else {
+                        // Expand
+                        content.style.display = 'block';
+                        setTimeout(() => {
+                            content.classList.add('expanded');
+                            this.classList.add('expanded');
+                            indicator.textContent = '[-]';
+                        }, 10);
+                    }
+                });
+            });
+
+            // Terminal simulator functionality
+            const terminalInput = document.querySelector('.terminal-input');
+            const terminalOutput = document.getElementById('terminalOutput');
+            
+            if (terminalInput && terminalOutput) {
+                const commands = {
+                    help: 'Available commands: help, skills, projects, contact, clear, whoami, date, pwd',
+                    skills: 'Python, Machine Learning, JavaScript, Data Science, Cloud Platforms, NLP, SQL',
+                    projects: 'Les Pomponnettes - Necklace Personalization Extension\nSecret Initiative - Coming soon...',
+                    contact: 'Email: lemaildebaptistepauletto@gmail.com\nGitHub: github.com/baptistepauletto\nLinkedIn: linkedin.com/in/baptiste-pauletto',
+                    whoami: 'Baptiste Pauletto - Data Scientist & Software Engineer',
+                    date: new Date().toLocaleString(),
+                    pwd: '/home/baptistepauletto',
+                    clear: 'CLEAR_TERMINAL'
+                };
+
+                terminalInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        const command = this.value.trim().toLowerCase();
+                        const commandLine = document.createElement('div');
+                        commandLine.className = 'terminal-output-line command';
+                        commandLine.textContent = `bpauletto@dev:~$ ${this.value}`;
+                        terminalOutput.appendChild(commandLine);
+
+                        if (commands[command]) {
+                            if (commands[command] === 'CLEAR_TERMINAL') {
+                                terminalOutput.innerHTML = '';
+                            } else {
+                                const outputLine = document.createElement('div');
+                                outputLine.className = 'terminal-output-line';
+                                outputLine.innerHTML = commands[command].replace(/\n/g, '<br>');
+                                terminalOutput.appendChild(outputLine);
+                            }
+                        } else if (command) {
+                            const errorLine = document.createElement('div');
+                            errorLine.className = 'terminal-output-line error';
+                            errorLine.textContent = `Command not found: ${command}. Type 'help' for available commands.`;
+                            terminalOutput.appendChild(errorLine);
+                        }
+
+                        this.value = '';
+                        terminalOutput.scrollTop = terminalOutput.scrollHeight;
+                    }
+                });
+            }
 
             // Scramble text effect
             const scrambleElements = document.querySelectorAll('.scramble-text');
